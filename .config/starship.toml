@@ -1,0 +1,136 @@
+# Lofi Sunrise color palette
+# Calm and warm sunrise-inspired colors
+# -------------------------------------
+# Background/Base:   #2a1e2e (Dark Plum)
+# Username:          #51344d (Warm Mauve)
+# Directory:         #6d597a (Muted Purple)
+# Git:               #8d6a9f (Faded Lilac)
+# Version/Languages: #a06c88 (Warm Rose)
+# Docker:            #dda0dd (Pastel Lavender)
+# Time:              #f4b6b6 (Sunrise Pink)
+# Symbol accents:    #eac4d5 (Light Pink)
+
+format = """
+[](#2a1e2e)\
+$username\
+[](bg:#51344d fg:#2a1e2e)\
+
+$directory\
+[](fg:#51344d bg:#6d597a)\
+$git_branch\
+$git_status\
+[](fg:#6d597a bg:#8d6a9f)\
+$python\
+$elixir$elm$golang$haskell$java$julia$nodejs$nim\
+[](fg:#8d6a9f bg:#dda0dd)\
+$docker_context\
+[](fg:#dda0dd bg:#d3939f)\
+$time\
+[](fg:#d3939f)\
+\n$character"""
+
+[username]
+show_always = true
+style_user = "bg:#2a1e2e"
+style_root = "bg:#eac4d5"
+format = '[$user ]($style)'
+
+disabled = false
+
+[directory]
+style = "bg:#51344d"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#6d597a"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#6d597a"
+format = '[$all_status$ahead_behind ]($style)'
+
+[c]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+
+[elixir]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+symbol = " "
+style = "bg:#8d6a9f"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:#dda0dd"
+format = '[ $symbol $context ]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#d3939f"
+format = '[  $time ]($style)'
+
+[character]
+success_symbol = "[ ❯](#f4b6b6)"
+error_symbol = "[ ❯](red)"
+
