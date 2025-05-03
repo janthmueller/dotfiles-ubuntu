@@ -1,0 +1,48 @@
+#!/bin/bash
+
+LOG_FILE="/tmp/tmux-move-debug.log"
+exec >> "$LOG_FILE" 2>&1
+echo "---- $(date) ----"
+
+RAW="$1"
+TARGET="$RAW"
+if [ "$RAW" = "0" ]; then
+  TARGET="10"
+fi
+echo "Target window index: $TARGET"
+
+# Get the current pane ID and owning window
+CURRENT_PANE="$(tmux display-message -p '#{pane_id}')"
+PANE_WIN="$(tmux display-message -p -t "$CURRENT_PANE" '#{window_index}')"
+
+echo "Current pane: $CURRENT_PANE"
+echo "Pane's owning window: $PANE_WIN"
+
+# Do nothing if already in target window
+if [ "$PANE_WIN" = "$TARGET" ]; then
+  echo "Already in window $TARGET. Exiting."
+  exit 0
+fi
+
+# Determine if the target window already exists
+if tmux list-windows -F '#I' | grep -qx "$TARGET"; then
+  echo "Target window $TARGET exists. Joining pane."
+  tmux join-pane -s "$CURRENT_PANE" -t ":$TARGET" -h
+  tmux select-layout -t ":$TARGET" tiled
+else
+  echo "Creating window $TARGET"
+  tmux new-window -t "$TARGET"
+  # Join into the new window
+  tmux join-pane -s "$CURRENT_PANE" -t ":$TARGET" -h
+  tmux select-layout -t ":$TARGET" tiled
+  # Remove only if that window now has 2 panes (ours + dummy)
+  echo "Checking if dummy pane exists..."
+  DUMMY_PANE="$(tmux list-panes -t "$TARGET" -F '#{pane_id}' | head -n 1)"
+  if [ "$DUMMY_PANE" != "$CURRENT_PANE" ]; then
+    echo "Killing dummy pane: $DUMMY_PANE"
+    tmux kill-pane -t "$DUMMY_PANE"
+  else
+    echo "No dummy pane detected"
+  fi
+fi
+
