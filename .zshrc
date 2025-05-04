@@ -120,7 +120,8 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Add Neovim path
 export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
-
+# Add Cargo path
+export PATH="/home/jantmueller/.cargo/bin:$PATH"
 # Aliases
 alias dotfiles='/usr/bin/git --git-dir=/home/jantmueller/.dotfiles/ --work-tree=/home/jantmueller'
 alias ll="ls -alF"
