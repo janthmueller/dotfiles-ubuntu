@@ -135,3 +135,18 @@ bindkey -r '^S'
 if [[ -t 1 ]]; then
   stty -ixon
 fi
+
+
+# auto start  tmux
+if command -v tmux &>/dev/null; then
+  if [ -z "$TMUX" ]; then
+    tmux has-session -t main 2>/dev/null
+    if [ $? != 0 ]; then
+      tmux new-session -s main
+    else
+      tmux attach-session -t main
+    fi
+    exit
+  fi
+fi
+
