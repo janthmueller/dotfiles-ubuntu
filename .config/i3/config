@@ -190,5 +190,5 @@ for_window [class=".*"] border none
 #         status_command i3status
 # }
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
+exec --no-startup-id setxkbmap -model pc105 -layout de -variant us -option
 

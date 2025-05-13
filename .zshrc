@@ -150,4 +150,3 @@ if command -v tmux &>/dev/null; then
     exit
   fi
 fi
-
