@@ -79,14 +79,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  z
+  zoxide
   sudo
   zsh-autosuggestions
   zsh-syntax-highlighting
+  fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
-
+# Then add your custom keybindings for autosuggestions
+bindkey '^[[C' undefined-key
+bindkey '^y' autosuggest-accept
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -151,3 +154,6 @@ if command -v tmux &>/dev/null; then
   fi
 fi
 eval "$(direnv hook zsh)"
+
+
+alias gap='git add -p'
