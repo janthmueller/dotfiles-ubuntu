@@ -3,11 +3,13 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"jvgrootveld/telescope-zoxide",
+		"nvim-telescope/telescope-file-browser.nvim", -- File browser added
 	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
 		local builtin = require("telescope.builtin")
+		local fb_actions = require("telescope").extensions.file_browser.actions
 
 		telescope.setup({
 			defaults = {
@@ -64,10 +66,30 @@ return {
 						},
 					},
 				},
+				file_browser = {
+					hijack_netrw = true,
+					mappings = {
+						i = {
+							["<C-c>"] = fb_actions.create,
+							["<C-r>"] = fb_actions.rename,
+							["<C-x>"] = fb_actions.remove, -- Delete changed to <C-x>
+							["<C-y>"] = fb_actions.copy,
+							["<C-m>"] = fb_actions.move,
+						},
+						n = {
+							["<C-c>"] = fb_actions.create,
+							["<C-r>"] = fb_actions.rename,
+							["<C-x>"] = fb_actions.remove, -- Delete changed to <C-x>
+							["<C-y>"] = fb_actions.copy,
+							["<C-m>"] = fb_actions.move,
+						},
+					},
+				},
 			},
 		})
 
 		telescope.load_extension("zoxide")
+		telescope.load_extension("file_browser")
 
 		local map = vim.keymap.set
 		map("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
@@ -77,5 +99,14 @@ return {
 		map("n", "<leader>fz", function()
 			telescope.extensions.zoxide.list()
 		end, { desc = "Zoxide" })
+		map("n", "<leader>fe", function()
+			telescope.extensions.file_browser.file_browser({
+				path = "%:p:h",
+				select_buffer = true,
+				grouped = true,
+				hidden = true,
+				respect_gitignore = true,
+			})
+		end, { desc = "File Browser" })
 	end,
 }
