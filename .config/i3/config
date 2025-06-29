@@ -192,3 +192,4 @@ for_window [class=".*"] border none
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id setxkbmap -model pc105 -layout de -variant us -option
 
+exec --no-startup-id dunst
