@@ -11,11 +11,12 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.isort,
+				null_ls.builtins.formatting.ruff,
 			},
 		})
 
 		require("mason-null-ls").setup({
-			ensure_installed = { "stylua", "black", "isort" },
+			ensure_installed = { "stylua", "black", "isort", "ruff" },
 			automatic_installation = true,
 		})
 

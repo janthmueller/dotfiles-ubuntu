@@ -89,6 +89,7 @@ return {
     map("n", "<leader>fg", builtin.live_grep, { desc = "Grep Files" })
     map("n", "<leader>fo", builtin.oldfiles, { desc = "Recent Files" })
     map("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
+    map("n", "<leader>fd", builtin.diagnostics, { desc = "Diagnostics" })
 
     -- Enhanced fz: switch dir, optionally wipe buffers, open alpha
     map("n", "<leader>fz", function()
